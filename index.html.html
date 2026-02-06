@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Question très importante 💖</title>
+
+  <style>
+    body {
+      background: #ffe6ee;
+      font-family: Arial, sans-serif;
+      height: auto;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+
+    }
+    .btn-retour {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #ff4d6d;
+    /* ... tous tes autres styles ... */
+}
+
+    .container {
+      text-align: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    h1 {
+      margin-top: 80px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 15px 30px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #oui {
+      background-color: #ff4d6d;
+      color: white;
+      transition: transform 0.3s;
+    }
+     #Repas {
+      background-color: #ff4d6d;
+      color: white;
+      transition: transform 0.3s;
+    }
+     #Activites {
+      background-color: #ff4d6d;
+      color: white;
+      transition: transform 0.3s;
+    }
+     #Tenue {
+      background-color: #ff4d6d;
+      color: white;
+      transition: transform 0.3s;
+    }
+      
+
+    #non {
+      background-color: #ccc;
+      position: absolute;
+      top: 55%;
+      left: 45%;
+    }
+
+    /* Boule disco */
+    #disco {
+      position: fixed;
+      top: 50px;
+      right: 50px;
+      width: 200px;
+      display: none;
+      animation: rotation 2s linear infinite;
+    }
+    /* PAGE OUI */
+    #page-oui {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+    #page-repas {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+    #page-tenue {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+    #page-activité {
+  text-align: center; /* centre le titre */
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+    #page-surprise {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding: 50px;
+}
+    #surprise {
+    position: absolute; /* Indispensable pour qu'il puisse bouger */
+    background-color: #ffb3c1;
+    color: #d63384;
+    border: 2px solid #d63384;
+    font-weight: bold;
+    transition: all 0.4s ease; /* Rend le déplacement fluide */
+    z-index: 1000;
+}
+
+
+.boutons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+} 
+.photo-moi {
+    position: fixed; /* L'image reste en place même si on scroll */
+    left: 20px;     /* Distance par rapport au bord droit */
+    top: 50%;        /* Centré verticalement */
+    transform: translateY(-50%); /* Ajustement pour un centrage parfait */
+    width: 300px;    /* Largeur de la photo (ajuste selon tes besoins) */
+    border-radius: 10px; /* Coins arrondis pour le style */
+    border: 5px solid white;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
+    z-index: 100;    /* Pour être sûr qu'elle passe devant le reste */
+}
+
+
+.photo-Clo {
+    position: fixed; /* L'image reste en place même si on scroll */
+    right: 20px;     /* Distance par rapport au bord droit */
+    top: 60%;       /* Positionné plus bas que l'autre image pour éviter le chevauchement */
+    transform: translateY(-50%); /* Ajustement pour un centrage parfait */
+    width: 200px;    /* Largeur de la photo (ajuste selon tes besoins) */
+    border-radius: 10px; /* Coins arrondis pour le style */
+    border: 5px solid white;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
+    z-index: 100;    /* Pour être sûr qu'elle passe devant le reste */
+}
+
+
+.photo-moi2 {
+    position: fixed; /* L'image reste en place même si on scroll */
+    left: 20px;     /* Distance par rapport au bord droit */
+    top: 50%;        /* Centré verticalement */
+    transform: translateY(-50%); /* Ajustement pour un centrage parfait */
+    width: 300px;    /* Largeur de la photo (ajuste selon tes besoins) */
+    border-radius: 10px; /* Coins arrondis pour le style */
+    border: 5px solid white;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
+    z-index: 100;    /* Pour être sûr qu'elle passe devant le reste */
+}
+.photo_a_deux {
+    position: fixed; /* L'image reste en place même si on scroll */
+    top: 75%;        /* Centré verticalement */
+    transform: translateY(-50%); /* Ajustement pour un centrage parfait */
+    right: 40%;     /* Distance par rapport au bord droit */
+    width: 300px;    /* Largeur de la photo (ajuste selon tes besoins) */
+    border-radius: 10px; /* Coins arrondis pour le style */
+    border: 5px solid white;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
+    z-index: 100;    /* Pour être sûr qu'elle passe devant le reste */
+}
+
+/* Optionnel : cacher la photo sur mobile si elle prend trop de place */
+@media (max-width: 768px) {
+    .photo-moi {
+        display: none;
+    }
+}
+
+
+
+
+/* Style de la carte */
+.menu-simple {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background: white;
+    }
+
+    h1 { text-align: center; color: #b03a2e; }
+    
+    .section {
+        margin-bottom: 30px;
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 20px;
+    }
+
+    .section h2 {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    /* Style des options */
+    .option {
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .option input {
+        margin-right: 10px;
+    }
+
+    .theme {
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .desc {
+        display: block;
+        font-size: 0.9rem;
+        font-style: italic;
+        color: #666;
+        margin-left: 25px;
+    }
+
+
+    .texte-libre {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    @keyframes rotation {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="page-question" class="container">
+    <h1>Veux-tu être ma Valentine ? 👉👈 </h1>
+
+    <button id="oui">Oui ❤️</button>
+    <button id="non">Non 🙄</button>
+    <button id="surprise" style="display: none;"> Raisons de dire oui </button>
+    <p id="message-secret" style="display: none; color: #ff4d6d; font-weight: bold; font-style: italic; margin-top: 10px;">
+    On dirait que tu as du mal à cliquer sur "Non"... C'est un signe ! 😉
+</p>
+    <p id="message-secret2" style="display: none; color: #ff4d6d; font-weight: bold; font-style: italic; margin-top: 10px;">
+    C'est mignon de voir que tu essaies, mais "Non" est un bouton très timide ! 😄
+</p>
+    <p id="message-secret3" style="display: none; color: #ff4d6d; font-weight: bold; font-style: italic; margin-top: 10px;">
+    Tu sais, "Non" a peur de l'engagement... mais moi, je suis prêt à tout pour toi !  💖 </p>
+
+    <p style="text-align: center; font-size: 0.8rem; margin-top: 30px;">
+      ✨ Clique sur "Non" pour découvrir une surprise ✨ </p>
+    
+    <p id="message-secret4" style="display: none; color: #ff4d6d; font-weight: bold; font-style: italic; margin-top: 10px;">
+      Continue à cliquer sur "Non" tu auras des raisons de dire oui ! </p>
+
+
+
+
+
+  </div>
+
+
+  <div id="page-oui" style="text-align: center; padding: 20px;">
+  <!-- PAGE OUI : images + textes -->
+   <img src="Clo_fleur.JPEG" class="photo-Clo" alt="Clo">
+    <img src="Moi_lunettes.JPEG" class="photo-moi2" alt="Moi">
+    <img src="Photo_a_deux.JPEG" class="photo_a_deux" alt="Nous deux">
+
+   <h1 style="color: #ff4d6d; font-size: 40px;">C'EST GÉNIAL ! 💖</h1>
+    
+    <p style="font-size: 20px; color: #333;">
+        Maintenant que c'est officiel, on passe aux choses sérieuses.<br>
+        <b>Choisis tes options pour notre soirée :</b>
+    </p>
+
+    <div class="boutons">
+    <button id="Repas">Le repas</button>
+    <button id="Activites">Les activités</button>
+    <button id="Tenue">Le contrat</button>
+    </div>
+
+</div>
+
+</div>
+
+<div id="page-repas">
+    <!-- PAGE REPAS -->
+    <div class="menu-simple">
+    <h1>Notre Dîner</h1>
+    <img src="photo_cuisto.png" class="photo-moi" alt="Moi">
+    <img src="Clo_plante.png" class="photo-Clo" alt="Clo">
+
+    <div class="section">
+        <h2>— Les Entrées —</h2>
+        
+        <label class="option">
+            <input type="radio" name="entree" value="etudiant">
+            <span class="theme">[Étudiant]</span> Oeuf Mayo
+            <span class="desc">Tout est dans le nom</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="entree" value="modere">
+            <span class="theme">[Normal]</span> Planche mixte
+            <span class="desc">Charcuterie/Fromage (achetée en promo, mais bien présentée)</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="entree" value="fancy">
+            <span class="theme">[Fancy]</span> Carpaccio de Saint-Jacques
+            <span class="desc">Fines tranches et marinade d'agrumes.</span>
+        </label>
+    </div>
+
+    <div class="section">
+        <h2>— Les Plats —</h2>
+        
+        <label class="option">
+            <input type="radio" name="plat" value="etudiant">
+            <span class="theme">[Étudiant]</span> Pâtes Burrata
+            <span class="desc">Pâtes fraîches"Al dente" (car plus de gaz) au ketchup, agrémentées 
+                d'un Cordon Bleu lidl-style.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="plat" value="modere">
+            <span class="theme">[Normal]</span> Risotto Champignons
+            <span class="desc">Cuisiné au vin blanc et parmesan.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="plat" value="fancy">
+            <span class="theme">[Fancy]</span> Magret de Canard
+            <span class="desc">Réduction de miel et purée maison.</span>
+        </label>
+    </div>
+
+    <div class="section">
+        <h2>— Les Desserts —</h2>
+        
+        <label class="option">
+            <input type="radio" name="dessert" value="etudiant">
+            <span class="theme">[Étudiant]</span> La spéciale
+            <span class="desc">Un yaourt à boire et un biscuit BN un peu mou.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="dessert" value="modere">
+            <span class="theme">[Normal]</span> Terreur au chocolat
+            <span class="desc">Fondant au chocolat, mais avec une petite boule de glace vanille pour faire joli.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="dessert" value="fancy">
+            <span class="theme">[Fancy]</span> Dôme Chocolat Or
+            <span class="desc">Éclats de noisettes et feuille d'or.</span>
+        </label>
+    </div>
+
+    <p style="text-align:center; font-size: 0.8rem; margin-top: 30px;">
+        ✨ Coche tes préférences pour ce soir ✨<br> 
+        Envoi moi un screen psk le site est pas responsive <br>
+        Choisis pas le Fancy, c'etait juste pour faire joli dans le menu, je suis pas capable de faire ça
+    </p>
+    <button id="Retour" class="btn-retour">Retour</button>
+
+</div>
+</div>
+
+<div id="page-activité" style="text-align: center; padding: 20px;">
+    
+
+
+    <h1 style="color: #ff4d6d; margin-bottom: 30px;">Le Programme 🎫</h1>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+        
+        <div style="flex: 1; min-width: 250px; max-width: 300px; background: white; padding: 20px; border-radius: 15px; border: 2px solid #ff4d6d; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #ff4d6d; text-transform: uppercase;">🍿 Repos</h3>
+            <p style="font-weight: bold;">PrimeVideo & Repos</p>
+            <ul style="text-align: left; font-size: 0.9rem; color: #555; padding-left: 20px;">
+        <li>Je vais chercher a graille</li>
+        <li>Grosse dose de plaids</li>
+        <li>Commentaire crari Regelegorilla</li>
+        <li>Do(r/d)o garanti à 23h</li> 
+        <li style="list-style: none; margin-top: 10px; font-weight: bold; color: #333;">
+            Do<input type="text" id="lettre-choix" maxlength="1" placeholder="." 
+                style="width: 20px; border: none; border-bottom: 2px solid #ff4d6d; text-align: center; font-weight: bold; outline: none; color: #ff4d6d;">o garanti à 23h (choisit la lettre)
+        </li>
+    </ul>
+            <img src="meme_doro.JPEG" alt="Doro" style="width: 200px; margin-top: 10px;">
+            <label style="cursor: pointer; display: block; margin-top: 15px; background: #ff4d6d; color: white; padding: 10px; border-radius: 8px;">
+                <input type="radio" name="activite" value="netflix"> Choisir celui-là
+            </label>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; max-width: 300px; background: white; padding: 20px; border-radius: 15px; border: 2px solid #ff4d6d; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #ff4d6d; text-transform: uppercase;">🧶 Créatif</h3>
+            <p style="font-weight: bold;">Atelier Crochet</p>
+            <ul style="text-align: left; font-size: 0.9rem; color: #555; padding-left: 20px;">
+                <li>Apprentissage des bases</li>
+                <li>Il te faut un string en crochet</li>
+                <li>Thé, chocolat chaud, goudale</li>
+                <li>Zéro écran, juste nous deux et kiffeur</li>
+            </ul>
+            <img src="hot_girl_crochet.png" alt="Pelote de laine" style="width: 200px; margin-top: 10px;">
+            <label style="cursor: pointer; display: block; margin-top: 15px; background: #ff4d6d; color: white; padding: 10px; border-radius: 8px;">
+                <input type="radio" name="activite" value="crochet"> Choisir celui-là
+            </label>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; max-width: 300px; background: white; padding: 20px; border-radius: 15px; border: 2px solid #ff4d6d; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #ff4d6d; text-transform: uppercase;">⛰️ Folie</h3>
+            <p style="font-weight: bold;">Expédition Sainte-Baume</p>
+            <ul style="text-align: left; font-size: 0.9rem; color: #555; padding-left: 20px;">
+                <li>Trek nocturne à la frontale</li>
+                <li>Nuit à la belle étoile dans la tente</li>
+                <li>Lever de soleil au sommet avec des nuages</li>
+                <li>Retour épuisés mais heureux</li>
+                <li>Prévoir chaussures de rando et duvet</li>
+                <li>On va en chier terrible</li>
+                <img src="Clo_rando.PNG" alt="Rando" style="width: 100px; margin-top: 10px;">
+                <img src="Moi_rando.JPEG" alt="Rando" style="width: 100px; margin-top: 10px;">
+                <li style="list-style: none; margin-top: 10px; font-weight: bold; color: #333;">
+                    (Optionnel : on peut faire ça un autre jour que la Saint-Valentin si tu veux pas galérer ce jour-là)</li>
+            </ul>
+            <label style="cursor: pointer; display: block; margin-top: 15px; background: #ff4d6d; color: white; padding: 10px; border-radius: 8px;">
+                <input type="radio" name="activite" value="trek"> Choisir celui-là
+            </label>
+        </div>
+
+    </div>
+
+    <button id="Retour2" class="btn-retour" style="background-color: #ff4d6d; color: white; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer;">Retour</button>
+
+</div>
+<div id="page-tenue" style="text-align: center; padding: 20px;">
+    <img src="Montage.JPEG" class="photo-Clo" alt="Clo">
+    <img src="costume.JPEG" class="photo-moi" alt="Moi">
+    <h1 style="color: #ff4d6d; text-transform: uppercase; letter-spacing: 2px;">📜 Contrat</h1>
+
+    <div style="background: #fffdf5; color: #333; padding: 30px; border: 4px double #d63384; border-radius: 2px; max-width: 550px; margin: 0 auto; box-shadow: 10px 10px 0px #ffb3c1; font-family: 'Times New Roman', serif;">
+        
+        <p style="font-size: 1.2rem; font-weight: bold; text-decoration: underline; margin-bottom: 20px;">ENGAGEMENTS DE CHACUN DES PARTIS :</p>
+        
+        <div style="text-align: left; line-height: 1.8; font-size: 1.1rem;">
+            <p>• <b>Article 1 :</b> Je m'engage à ce qu'on se mette une race mémorable d'ici la fin de la semaine (pas d'excuse, c'est contractuel).</p>
+            <p>• <b>Article 2 :</b> J'accepte que ma dignité soit temporairement suspendue en cas de flop.</p>
+            <p>• <b>Article 3 :</b> Je mangerai tout ce qui aura été cuisiné.</p>
+            <p>• <b>Article 4 :</b> Je valide le fait que si je perds aux jeux/activités, je ne boude pas. </p>
+            <p>• <b>Article 5 :</b> Je m'engage à réduire mon temps d'écran à moins d'1h paar jour</p>
+        </div>
+
+        <div style="margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px;">
+            <p style="font-style: italic;">"En cochant cette case, je fais en sorte que le sejour ne flop pas."</p>
+            <input type="checkbox" id="signature" style="transform: scale(1.5); cursor: pointer;"> 
+            <label for="signature" style="font-weight: bold; margin-left: 10px; cursor: pointer;">LU ET APPROUVÉ</label>
+        </div>
+    </div>
+
+    <h2 style="margin-top: 40px; color: #ff4d6d;">🎁 TIRE UN JOKER DE SECOURS</h2>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+        <div onclick="alert('JOKER : La Carte Noire. Tu peux annuler une de mes vannes si elle est vraiment trop nulle.')" style="width: 100px; height: 140px; background: white; border: 2px solid #ff4d6d; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 5px 5px 0px #ff4d6d;">🃏</div>
+        
+        <div onclick="alert('JOKER : Le Coup d\'État. Tu peux changer de musique n\'importe quand, même en plein milieu.')" style="width: 100px; height: 140px; background: white; border: 2px solid #ff4d6d; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 5px 5px 0px #ff4d6d;">🃏</div>
+        
+        <div onclick="alert('JOKER : Le Totem d\'Immunité. Tu as le droit de me faire faire la vaisselle tout seul.')" style="width: 100px; height: 140px; background: white; border: 2px solid #ff4d6d; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 5px 5px 0px #ff4d6d;">🃏</div>
+    </div>
+
+    <br><br>
+    <button id="Retour1" class="btn-retour">Retour au menu</button>
+</div>
+
+<div id="page-surprise" style="position: relative; width: 100%; min-height: 100vh; overflow: hidden;">
+    
+    <button id="Retour3" class="btn-retour">Retour</button>
+    <h2 style="text-align: center;">Pourquoi je suis le meilleur candidat</h2>
+
+    <div style="background-color: #fff5f8; border: 2px dashed #ffb3c1; padding: 20px; border-radius: 15px; font-family: 'Comic Sans MS', cursive, sans-serif; color: #d63384; max-width: 400px; margin: 40px auto; position: relative; z-index: 10;">
+        <h3 style="text-align: center; text-decoration: underline;">Mes exploits de grand :</h3>
+        <ul style="list-style-type: '⭐'; padding-left: 25px;">
+            <li>Je fais mon lit tout seul.</li>
+            <li>Je ne fais plus pipi au lit.</li>
+            <li>Je mange mes légumes.</li>
+            <li>Je sais faire mes lacets.</li>
+            <li>Je prête mes jouets.</li>
+            <li>Je range ma chambre.</li>
+            <li>Je colorie sans dépasser.</li>
+        </ul>
+      <p>Signé : Ton admirateur secret qui est très sage.</p>
+
+        <p style="text-align: center; font-weight: bold; margin-top: 20px;">Alors, tu dis oui ? 🥺</p>
+    </div>
+
+    <img src="Troll1.JPEG" style="position: absolute; top: 20%; left: 5%; width: 120px; transform: rotate(-15deg); border: 3px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+    
+    <img src="Troll2.JPEG" style="position: absolute; top: 15%; right: 5%; width: 250px; transform: rotate(10deg); border: 3px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+    
+    <img src="Troll3.JPG" style="position: absolute; top: 45%; left: 2%; width: 210px; transform: rotate(5deg); border: 3px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+    
+    <img src="Troll4.JPEG" style="position: absolute; bottom: 13%; left: 30%; width: 240px; transform: rotate(-10deg); border: 3px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+    
+    <img src="Troll5.JPEG" style="position: absolute; bottom: 15%; right: 8%; width: 350px; transform: rotate(15deg); border: 3px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+
+
+</div>
+
+
+  <!-- Musique -->
+  <audio id="musique" src="musique.mp3" loop></audio>
+
+  <!-- Boule disco -->
+  <img id="disco" src="disco.jpg" alt="Boule disco">
+
+  <script>
+    const nonBtn = document.getElementById("non");
+    const ouiBtn = document.getElementById("oui");
+    
+    
+    
+    const musique = document.getElementById("musique");
+    const disco = document.getElementById("disco");
+    const pageQuestion = document.getElementById("page-question");
+    const pageOui = document.getElementById("page-oui");
+    
+   
+    
+
+    const pageSurprise = document.getElementById("page-surprise");
+    const surpriseBtn = document.getElementById("surprise");
+    const Retour3Btn = document.getElementById("Retour");
+    
+    const pageRepas = document.getElementById("page-repas");
+    const RepasBtn = document.getElementById("Repas");
+    const RetourBtn = document.getElementById("Retour");
+
+
+    const ActivitesBtn = document.getElementById("Activites");
+    const pageActivites = document.getElementById("page-activité");
+    const Retour2Btn = document.getElementById("Retour2");
+
+    const pageTenue = document.getElementById("page-tenue");
+    const TenueBtn = document.getElementById("Tenue");
+    const Retour1Btn = document.getElementById("Retour1");
+
+    let compteurNon = 0; // On initialise le compteur
+
+
+    let tailleOui = 1;
+    let musiqueLancee = false;
+    let fuitesSurprise = 0; // Compteur pour le bouton surprise
+
+surpriseBtn.addEventListener("mouseenter", () => {
+    // Le bouton s'enfuit seulement 3 fois
+    if (fuitesSurprise < 3) {
+        const maxX = window.innerWidth - surpriseBtn.offsetWidth;
+        const maxY = window.innerHeight - surpriseBtn.offsetHeight;
+
+        const x = Math.max(0, Math.random() * maxX);
+        const y = Math.max(0, Math.random() * maxY);
+
+        surpriseBtn.style.left = x + "px";
+        surpriseBtn.style.top = y + "px";
+
+        fuitesSurprise++;
+    } else {
+        // Au bout de la 4ème fois, il ne bouge plus et change de couleur pour dire "C'est bon, j'abandonne !"
+        surpriseBtn.style.backgroundColor = "#4CAF50";
+        surpriseBtn.style.color = "white";
+        surpriseBtn.innerText = "Ok, je me laisse attraper ! ✨";
+    }
+});
+
+    nonBtn.addEventListener("mouseenter", () => {
+      // Musique au premier mouvement
+      if (!musiqueLancee) {
+        musique.play();
+        musiqueLancee = true;
+      }
+        compteurNon++; // On incrémente le compteur à chaque fois que la souris entre sur le bouton "Non"
+      if (compteurNon >= 10) { // Si le compteur atteint 10, on affiche le bouton de surprise
+        surpriseBtn.style.display = "inline-block";
+    }
+      if (compteurNon === 2) {
+        document.getElementById("message-secret").style.display = "block";
+      } else if (compteurNon === 4) {
+        document.getElementById("message-secret2").style.display = "block";
+      } else if (compteurNon === 6) {
+        document.getElementById("message-secret3").style.display = "block";
+      }
+        else if (compteurNon === 8) {
+            document.getElementById("message-secret4").style.display = "block";
+        }
+
+      // Déplacement du bouton Non
+      const maxX = window.innerWidth - nonBtn.offsetWidth;
+      const maxY = window.innerHeight - nonBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      nonBtn.style.left = x + "px";
+      nonBtn.style.top = y + "px";
+
+      // Grossir le bouton Oui
+      tailleOui += 0.12;
+      ouiBtn.style.transform = `scale(${tailleOui})`;
+    });
+
+    ouiBtn.addEventListener("click", () => {
+  pageQuestion.style.display = "none";
+  pageOui.style.display = "block";
+  disco.style.display = "block";
+    
+});
+    RepasBtn.addEventListener("click", () => {
+  pageOui.style.display = "none";   
+    pageRepas.style.display = "block";
+});
+    ActivitesBtn.addEventListener("click", () => {
+    pageOui.style.display = "none";
+    pageActivites.style.display = "block";
+});
+    TenueBtn.addEventListener("click", () => {
+    pageOui.style.display = "none";
+    pageTenue.style.display = "block";
+});
+     surpriseBtn.addEventListener("click", () => {
+    pageQuestion.style.display = "none";
+    pageSurprise.style.display = "block";
+});
+// Retour depuis la page REPAS
+document.getElementById("Retour").onclick = () => {
+    document.getElementById("page-repas").style.display = "none"; // Cache le repas
+    document.getElementById("page-oui").style.display = "block";   // Affiche le menu de choix
+};
+
+// Retour depuis la page TENUE
+document.getElementById("Retour1").onclick = () => {
+    document.getElementById("page-tenue").style.display = "none"; // Cache la tenue
+    document.getElementById("page-oui").style.display = "block";   // Affiche le menu de choix
+};
+
+// Retour depuis la page ACTIVITÉS
+document.getElementById("Retour2").onclick = () => {
+    document.getElementById("page-activité").style.display = "none"; // Cache l'activité
+    document.getElementById("page-oui").style.display = "block";      // Affiche le menu de choix
+};
+
+// Retour depuis la page SURPRISE (les raisons "pipi au lit")
+document.getElementById("Retour3").onclick = () => {
+    document.getElementById("page-surprise").style.display = "none"; // Cache la surprise
+    document.getElementById("page-question").style.display = "block"; // Retour au TOUT DÉBUT (le bouton Oui/Non)
+};
+ 
+  </script>
+
+</body>
+</html>
