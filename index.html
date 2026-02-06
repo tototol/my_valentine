@@ -577,6 +577,22 @@
     let musiqueLancee = false;
     let fuitesSurprise = 0; // Compteur pour le bouton surprise
 
+
+    function lancerMusique() {
+    if (!musiqueLancee) {
+        musique.play().catch(e => console.log("Lecture bloquée par le navigateur"));
+        musiqueLancee = true;
+    }
+}
+    nonBtn.addEventListener("mouseenter", () => {
+  // On garde le code existant mais on ne lance plus la musique ici
+  // ... reste de ton code (déplacement du bouton, messages secrets, etc.)
+});
+
+// AJOUTE CECI : Lancer la musique si elle clique (même par erreur) sur Non ou Oui
+nonBtn.addEventListener("click", lancerMusique);
+ouiBtn.addEventListener("click", lancerMusique);
+
 surpriseBtn.addEventListener("mouseenter", () => {
     // Le bouton s'enfuit seulement 3 fois
     if (fuitesSurprise < 3) {
@@ -684,3 +700,4 @@ document.getElementById("Retour3").onclick = () => {
 
 </body>
 </html>
+
